@@ -13,6 +13,8 @@ import java.util.ArrayList;
 public class ZERO extends javax.swing.JFrame {
 
     public ArrayList<Carro> ListaDeCarros = new ArrayList();
+    public Carro Jugador1;
+    public Carro Jugador2;
 
     public ZERO() {
         initComponents();
@@ -170,6 +172,11 @@ public class ZERO extends javax.swing.JFrame {
 
         jComboBox2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox2ItemStateChanged(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -407,6 +414,22 @@ public class ZERO extends javax.swing.JFrame {
         Carrera.pack();
         Carrera.setVisible(true);
         Partida.setVisible(false);
+
+        Object one = jComboBox1.getSelectedItem();
+        for (int i = 0; i < ListaDeCarros.size(); i++) {
+            if (ListaDeCarros.get(i).toString().equals(one)) {
+                Jugador1 = ListaDeCarros.get(i);
+            }
+        }
+        Object one1 = jComboBox2.getSelectedItem();
+        for (int i = 0; i < ListaDeCarros.size(); i++) {
+            if (ListaDeCarros.get(i).toString().equals(one1)) {
+                Jugador2 = ListaDeCarros.get(i);
+            }
+        }
+        CarroJ1.setText(Jugador1.toString());
+        CARROJ2.setText(Jugador2.toString());
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
@@ -424,6 +447,17 @@ public class ZERO extends javax.swing.JFrame {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1PropertyChange
+
+    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
+        Object one = jComboBox2.getSelectedItem();
+        for (int i = 0; i < ListaDeCarros.size(); i++) {
+            if (ListaDeCarros.get(i).toString().equals(one)) {
+                JL_MARCAJ2.setText(ListaDeCarros.get(i).getMarca());
+                JL_MODELOJ2.setText(ListaDeCarros.get(i).getModelo());
+                JL_VELOCIDADJ2.setText(String.valueOf(ListaDeCarros.get(i).getVelocidad()));
+            }
+        }
+    }//GEN-LAST:event_jComboBox2ItemStateChanged
 
     public void LLenadoDeComboBox() {
         String[] arreiglo = new String[ListaDeCarros.size()];
