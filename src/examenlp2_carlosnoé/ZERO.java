@@ -24,7 +24,7 @@ public class ZERO extends javax.swing.JFrame {
         Partida.setVisible(true);
         CargarCarros();
         LLenadoDeComboBox();
-        File archivin = new File("Cancion");
+        File archivin = new File("Cancion.mp3");
         MusicPlayer Musica = new MusicPlayer(archivin);
         Musica.start();
     }
@@ -406,6 +406,10 @@ public class ZERO extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+Timer One= new Timer(JL_CronoMetro);
+One.start();
+AdminBarras ADM= new AdminBarras(jProgressBar1, Jugador1, jProgressBar2, Jugador2, JL_CronoMetro);
+ADM.start();
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
