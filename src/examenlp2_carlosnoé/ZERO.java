@@ -11,9 +11,9 @@ import java.util.ArrayList;
  * @author cd507 Fila 2 Asiento 1
  */
 public class ZERO extends javax.swing.JFrame {
-    
+
     public ArrayList<Carro> ListaDeCarros = new ArrayList();
-    
+
     public ZERO() {
         initComponents();
         Partida.pack();
@@ -160,6 +160,11 @@ public class ZERO extends javax.swing.JFrame {
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox1ItemStateChanged(evt);
+            }
+        });
+        jComboBox1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jComboBox1PropertyChange(evt);
             }
         });
 
@@ -405,19 +410,29 @@ public class ZERO extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-        
-        
-        
+        Object one = jComboBox1.getSelectedItem();
+        for (int i = 0; i < ListaDeCarros.size(); i++) {
+            if (ListaDeCarros.get(i).toString().equals(one)) {
+                JL_MARCAJ1.setText(ListaDeCarros.get(i).getMarca());
+                JL_MODELOJ1.setText(ListaDeCarros.get(i).getModelo());
+                JL_VELOCIDADJ1.setText(String.valueOf(ListaDeCarros.get(i).getVelocidad()));
+            }
+        }
     }//GEN-LAST:event_jComboBox1ItemStateChanged
-    
+
+    private void jComboBox1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox1PropertyChange
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1PropertyChange
+
     public void LLenadoDeComboBox() {
         String[] arreiglo = new String[ListaDeCarros.size()];
         for (int i = 0; i < ListaDeCarros.size(); i++) {
-            arreiglo[i] = ListaDeCarros.get(i).getModelo();
+            arreiglo[i] = ListaDeCarros.get(i).toString();
         }
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(arreiglo));
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(arreiglo));
-        
+
     }
 
     /**
