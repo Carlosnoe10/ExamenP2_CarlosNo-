@@ -11,11 +11,13 @@ import java.util.ArrayList;
  * @author cd507 Fila 2 Asiento 1
  */
 public class ZERO extends javax.swing.JFrame {
-
+    
     public ArrayList<Carro> ListaDeCarros = new ArrayList();
-
+    
     public ZERO() {
         initComponents();
+        Partida.pack();
+        Partida.setVisible(true);
     }
 
     /**
@@ -136,6 +138,11 @@ public class ZERO extends javax.swing.JFrame {
         jLabel5.setText("Partida");
 
         jButton2.setText("Crear Carro");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("Jugador 1");
@@ -150,6 +157,11 @@ public class ZERO extends javax.swing.JFrame {
 
         jComboBox1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
 
         jComboBox2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -204,6 +216,11 @@ public class ZERO extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton3.setText("Iniciar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PartidaLayout = new javax.swing.GroupLayout(Partida.getContentPane());
         Partida.getContentPane().setLayout(PartidaLayout);
@@ -371,7 +388,37 @@ public class ZERO extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         ListaDeCarros.add(new Carro(JTF_MARCA.getText(), JTF_MODELO.getText(), (int) JPIN_VELOCIDAD.getValue()));
+        Partida.setVisible(true);
+        Creador.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Creador.pack();
+        Creador.setVisible(true);
+        Partida.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Carrera.pack();
+        Carrera.setVisible(true);
+        Partida.setVisible(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        
+        
+        
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+    
+    public void LLenadoDeComboBox() {
+        String[] arreiglo = new String[ListaDeCarros.size()];
+        for (int i = 0; i < ListaDeCarros.size(); i++) {
+            arreiglo[i] = ListaDeCarros.get(i).getModelo();
+        }
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(arreiglo));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(arreiglo));
+        
+    }
 
     /**
      * @param args the command line arguments
@@ -403,7 +450,7 @@ public class ZERO extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ZERO().setVisible(true);
+                new ZERO().setVisible(false);
             }
         });
     }

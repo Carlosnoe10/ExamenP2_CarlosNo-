@@ -4,11 +4,14 @@
  */
 package examenlp2_carlosnoé;
 
+import java.io.Serializable;
+
 /**
  *
  * @author cd507
  */
-public class Carro {
+public class Carro implements Serializable{
+
     public String Marca;
     public String Modelo;
     public int Velocidad;
@@ -45,9 +48,7 @@ public class Carro {
 
     @Override
     public String toString() {
-        return "Carro{" + "Marca=" + Marca + ", Modelo=" + Modelo + ", Velocidad=" + Velocidad + '}';
+        return Marca + " " + Modelo;
     }
-    
-    
-    
+
 }
