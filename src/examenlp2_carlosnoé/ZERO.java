@@ -4,6 +4,7 @@
  */
 package examenlp2_carlosnoé;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -15,11 +16,23 @@ public class ZERO extends javax.swing.JFrame {
     public ArrayList<Carro> ListaDeCarros = new ArrayList();
     public Carro Jugador1;
     public Carro Jugador2;
+    public AdminDeAutoMoviles ADM_Moviles;
 
     public ZERO() {
         initComponents();
         Partida.pack();
         Partida.setVisible(true);
+        CargarCarros();
+        LLenadoDeComboBox();
+        File archivin = new File("Cancion");
+        MusicPlayer Musica = new MusicPlayer(archivin);
+        Musica.start();
+    }
+
+    public void CargarCarros() {
+        ADM_Moviles = new AdminDeAutoMoviles(ListaDeCarros, "Carros.CR");
+        ADM_Moviles.cargarArchivo();
+        ListaDeCarros = ADM_Moviles.getADM_Carros();
     }
 
     /**
@@ -96,6 +109,11 @@ public class ZERO extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton1.setText("CREAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout CreadorLayout = new javax.swing.GroupLayout(Creador.getContentPane());
         Creador.getContentPane().setLayout(CreadorLayout);
@@ -164,11 +182,6 @@ public class ZERO extends javax.swing.JFrame {
                 jComboBox1ItemStateChanged(evt);
             }
         });
-        jComboBox1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jComboBox1PropertyChange(evt);
-            }
-        });
 
         jComboBox2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -188,11 +201,9 @@ public class ZERO extends javax.swing.JFrame {
 
         JL_MARCAJ1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         JL_MARCAJ1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        JL_MARCAJ1.setText("jLabel11");
 
         JL_MARCAJ2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         JL_MARCAJ2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        JL_MARCAJ2.setText("jLabel12");
 
         jLabel13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -204,11 +215,9 @@ public class ZERO extends javax.swing.JFrame {
 
         JL_MODELOJ1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         JL_MODELOJ1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        JL_MODELOJ1.setText("jlabel");
 
         JL_MODELOJ2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         JL_MODELOJ2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        JL_MODELOJ2.setText("jLabel11");
 
         jLabel17.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -220,11 +229,9 @@ public class ZERO extends javax.swing.JFrame {
 
         JL_VELOCIDADJ1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         JL_VELOCIDADJ1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        JL_VELOCIDADJ1.setText("jLabel11");
 
         JL_VELOCIDADJ2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         JL_VELOCIDADJ2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        JL_VELOCIDADJ2.setText("jLabel11");
 
         jButton3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton3.setText("Iniciar");
@@ -399,9 +406,7 @@ public class ZERO extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        ListaDeCarros.add(new Carro(JTF_MARCA.getText(), JTF_MODELO.getText(), (int) JPIN_VELOCIDAD.getValue()));
-        Partida.setVisible(true);
-        Creador.setVisible(false);
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -433,6 +438,7 @@ public class ZERO extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+
         Object one = jComboBox1.getSelectedItem();
         for (int i = 0; i < ListaDeCarros.size(); i++) {
             if (ListaDeCarros.get(i).toString().equals(one)) {
@@ -442,11 +448,6 @@ public class ZERO extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jComboBox1ItemStateChanged
-
-    private void jComboBox1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox1PropertyChange
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1PropertyChange
 
     private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
         Object one = jComboBox2.getSelectedItem();
@@ -458,6 +459,15 @@ public class ZERO extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jComboBox2ItemStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ADM_Moviles.getADM_Carros().add(new Carro(JTF_MARCA.getText(), JTF_MODELO.getText(), (int) JPIN_VELOCIDAD.getValue()));
+        ADM_Moviles.escribirArchivo();
+        CargarCarros();
+        Partida.setVisible(true);
+        Creador.setVisible(false);
+        LLenadoDeComboBox();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void LLenadoDeComboBox() {
         String[] arreiglo = new String[ListaDeCarros.size()];
